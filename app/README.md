@@ -1,4 +1,4 @@
-# app
+# jellyfish
 
 A new Flutter project.
 
