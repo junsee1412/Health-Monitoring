@@ -32,58 +32,60 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 3,
-          child: Center(
-            child: FractionallySizedBox(
-              widthFactor: 0.8,
-              child: Wrap(
-                spacing: 2,
-                runSpacing: 4,
-                direction: Axis.vertical,
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.start,
-                children: [
-                  Text('Hello', style: TextStyle(
-                    color: textLatte,
-                    fontSize: 40,
-                    fontFamily: 'DM Sans',
-                    fontWeight: FontWeight.w500,
-                  )),
-                  const SizedBox(height: 4),
-                  Text('Junsee', style: TextStyle(
-                    color: textLatte,
-                    fontSize: 48,
-                    fontFamily: 'DM Sans',
-                    fontWeight: FontWeight.w700,
-                  ))
-                ]
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Center(
+              child: FractionallySizedBox(
+                widthFactor: 0.8,
+                child: Wrap(
+                  spacing: 2,
+                  runSpacing: 4,
+                  direction: Axis.vertical,
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.start,
+                  children: [
+                    Text('Hello', style: TextStyle(
+                      color: textLatte,
+                      fontSize: 40,
+                      fontFamily: 'DM Sans',
+                      fontWeight: FontWeight.w500,
+                    )),
+                    const SizedBox(height: 4),
+                    Text('Junsee', style: TextStyle(
+                      color: textLatte,
+                      fontSize: 48,
+                      fontFamily: 'DM Sans',
+                      fontWeight: FontWeight.w700,
+                    ))
+                  ]
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          flex: 3,
-          child:
-            Center(
-              child: Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                alignment: WrapAlignment.center,
-                runAlignment: WrapAlignment.center,
-                children: _buildList(newLs),
+          Expanded(
+            flex: 3,
+            child:
+              Center(
+                child: Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  alignment: WrapAlignment.center,
+                  runAlignment: WrapAlignment.center,
+                  children: _buildList(newLs),
+                ),
               ),
-            ),
-        ),
-        const Expanded(
-          flex: 1, child: SizedBox(),
-        )
-      ],
+          ),
+          const Expanded(
+            flex: 2, child: SizedBox(),
+          )
+        ],
+      ),
     );
   }
 }

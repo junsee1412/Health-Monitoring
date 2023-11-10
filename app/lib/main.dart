@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jellyfish/pages/category.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:jellyfish/pages/profile.dart';
 import 'MyColor.dart';
-
-
-const TextStyle _textStyle = TextStyle(
-  fontSize: 40,
-  fontWeight: FontWeight.bold,
-  letterSpacing: 2,
-  fontStyle: FontStyle.italic,
-);
 
 void main() {
   runApp(const MyApp());
@@ -40,16 +33,14 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -59,17 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   List<Widget> pages = const [
     CategoryPage(),
-    Text('Profile', style: _textStyle),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: baseLatte,
-      // appBar: AppBar(
-      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      //   title: Text(widget.title),
-      // ),
       body: Center(
         child: pages[_currentIndex],
       ),
