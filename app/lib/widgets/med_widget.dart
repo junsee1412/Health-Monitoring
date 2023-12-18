@@ -12,7 +12,7 @@ class MedObj {
   MedObj(this.name, this.icon, this.color, this.value, this.unit);
 }
 
-class MedWidget extends StatefulWidget{
+class MedWidget extends StatelessWidget {
   final MedObj medObj;
 
   const MedWidget({
@@ -21,102 +21,88 @@ class MedWidget extends StatefulWidget{
   });
 
   @override
-  State<StatefulWidget> createState() => _MedWidgetState();
-}
-
-class _MedWidgetState extends State<MedWidget> {
-
-  refresh() {
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        widget.medObj.value++;
-        // print(widget.medObj.name);
-        // print(widget.medObj.value);
-        refresh();
-      },
-      child: Container(
-        width: 137,
-        height: 120,
-        decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
+    return Container(
+      width: 150,
+      height: 120,
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
-        child: Stack(
-          children: [
-            Opacity(
-              opacity: 0.1,
-              child: Container(
-                decoration: ShapeDecoration(
-                  color: widget.medObj.color,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  )
+      ),
+      child: Stack(
+        children: [
+          Opacity(
+            opacity: 0.1,
+            child: Container(
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              )
+                color: medObj.color,
+              ),
             ),
-            Positioned(
-              left: 16,
-              top: 16,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(widget.medObj.icon, color: widget.medObj.color, size: 16),
-                      const SizedBox(width: 7),
-                      Text(widget.medObj.name, style: TextStyle(
-                        color: widget.medObj.color,
+          ),
+          Positioned(
+            left: 16,
+            top: 16,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(medObj.icon, color: medObj.color, size: 32),
+                    const SizedBox(width: 7),
+                    Text(
+                      medObj.name,
+                      style: TextStyle(
+                        color: medObj.color,
                         fontSize: 16,
                         fontFamily: 'DM Sans',
                         fontWeight: FontWeight.w400,
                         height: 0,
-                      )),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(widget.medObj.value.toString(), style: TextStyle(
-                        color: widget.medObj.color,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16,),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      medObj.value.toString(),
+                      style: TextStyle(
+                        color: medObj.color,
                         fontSize: 40,
                         fontFamily: 'DM Sans',
                         fontWeight: FontWeight.w700,
                         height: 0,
-                      )),
-                      const SizedBox(width: 4),
-                      Text(widget.medObj.unit, style: TextStyle(
-                        color: widget.medObj.color,
+                      ),
+                    ),
+                    const SizedBox(width: 4,),
+                    Text(
+                      medObj.unit,
+                      style: TextStyle(
+                        color: medObj.color,
                         fontSize: 16,
                         fontFamily: 'DM Sans',
                         fontWeight: FontWeight.w400,
                         height: 0,
-                      ))
-                    ]
-                  ),
-                ],
-              ),
-            )
-          ]
-        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

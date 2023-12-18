@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:jellyfish/pages/category.dart';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:jellyfish/pages/bluetooth/backgroundtask.dart';
+import 'package:jellyfish/pages/main/category.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:jellyfish/pages/profile.dart';
+import 'package:jellyfish/pages/main/profile.dart';
+import 'package:jellyfish/pages/setting.dart';
+import 'common/db_provider.dart';
 import 'MyColor.dart';
+import 'models/user.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  List<User>? users = await DBProvider.getUsers();
+
+  runApp(MyApp(home : users == null ? const Setting(isEdit: false,) : MyHomePage(user: users[0],)));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget? home;
+   const MyApp({
+    super.key,
+     this.home
+  });
 
   // This widget is the root of your application.
   @override
@@ -33,14 +45,15 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: home,
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  final User user;
+  const MyHomePage({super.key, required this.user});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -48,16 +61,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
-  List<Widget> pages = const [
-    CategoryPage(),
-    ProfilePage(),
-  ];
+  BackgroundTask? backgroundTask;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [
+      const CategoryPage(),
+      ProfilePage(user: widget.user,),
+    ];
+
     return Scaffold(
       backgroundColor: baseLatte,
       body: Center(
+
         child: pages[_currentIndex],
       ),
       bottomNavigationBar: NavigationBar(
@@ -88,5 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+  Future<void> _startBackgroundTask(BluetoothDevice device) async {
+    try {
+      backgroundTask = await BackgroundTask.connect(device);
+    } catch (e) {
+      print(e);
+    }
   }
 }
